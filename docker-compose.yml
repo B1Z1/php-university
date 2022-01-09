@@ -25,6 +25,17 @@ services:
 
   postgres:
     image: postgres:9.6.2-alpine
+    restart: always
+    ports:
+      - 5432:5432
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    volumes:
+#      - ./containers/postgres/user-data.txt/var/lib/data
+      - ./containers/postgres/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+      - ./containers/postgres/fill_tables.sql:/docker-entrypoint-initdb.d/fill_tables.sql
     environment:
       POSTGRES_USER: todoapp
       POSTGRES_DB: todos
