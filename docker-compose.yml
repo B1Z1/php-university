@@ -10,32 +10,26 @@ services:
       - ./containers/nginx/sites/:/etc/nginx/sites-available
       - ./containers/nginx/conf.d/:/etc/nginx/conf.d
     depends_on:
-      - php-fpm
+      - web
 
-  php-fpm:
+  web:
     build: ./containers/php
     ports:
       - 9000:9000
     volumes:
       - ./src:/var/www
     depends_on:
-      - postgress
+      - database
     environment:
       DATABASE_URL: postgres://todoapp@postgress/todos
 
-  postgres:
-    image: postgres:9.6.2-alpine
+  database:
+    image: mysql
     restart: always
     ports:
-      - 5432:5432
-    logging:
-      options:
-        max-size: 10m
-        max-file: "3"
+      - 3307:3306
     volumes:
-#      - ./containers/postgres/user-data.txt/var/lib/data
-      - ./containers/postgres/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
-      - ./containers/postgres/fill_tables.sql:/docker-entrypoint-initdb.d/fill_tables.sql
+      - ./containers/database:/docker-entrypoint-initdb.d
     environment:
-      POSTGRES_USER: todoapp
-      POSTGRES_DB: todos
+      MYSQL_DATABASE: shop
+      MYSQL_ROOT_PASSWORD: root
