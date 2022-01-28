@@ -10,6 +10,18 @@ VALUES ('Reading');
 INSERT INTO hobby (name)
 VALUES ('Jogging');
 
+INSERT INTO hobby (name)
+VALUES ('Boxing');
+
+INSERT INTO hobby (name)
+VALUES ('Drawing');
+
+INSERT INTO hobby (name)
+VALUES ('Dancing');
+
+INSERT INTO hobby (name)
+VALUES ('Swimming');
+
 INSERT INTO degree (name)
 VALUES ('High');
 

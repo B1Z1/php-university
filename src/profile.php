@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <?php include 'base/head.php'; ?>
-    <title>Home page</title>
+    <title>Profile page</title>
 </head>
 <body>
 
-Hello
+Hello, in profile
 
 <?php include 'base/footer.php'; ?>
 

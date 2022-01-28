@@ -1,0 +1,16 @@
+html,
+body {
+    overflow: auto;
+}
+
+.up-text-center {
+    text-align: center;
+}
+
+.up-height-screen {
+    height: 100vh;
+}
+
+.up-width-full {
+    width: 100%;
+}
