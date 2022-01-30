@@ -1,7 +1,8 @@
 import { ProductStorage } from '../utils/product/product-storage.js';
 
 class Cart {
-    #buttonSelector = '[data-cart]';
+    #buttonAddSelector = '[data-cart-add]';
+    #buttonRemoveSelector = '[data-cart-remove]';
 
     #checkoutButtonActiveClass = 'up-cart-button--active';
     #checkoutButtonSelector = '[data-cart-button]';
@@ -22,23 +23,31 @@ class Cart {
             this.#showCheckoutButton();
         }
 
-        this.#observeButtonsClick();
+        this.#observeButtonsAddClick();
+        this.#observeButtonsRemoveClick();
     }
 
     #setProductsMap() {
         this.#productsMap = this.#productStorage.get();
     }
 
-    #observeButtonsClick() {
-        document.querySelectorAll(this.#buttonSelector)
+    #observeButtonsAddClick() {
+        document.querySelectorAll(this.#buttonAddSelector)
             .forEach((button) => {
-                this.#observeButtonClick(button);
+                this.#observeButtonAddClick(button);
             });
     }
 
-    #observeButtonClick(button) {
+    #observeButtonsRemoveClick() {
+        document.querySelectorAll(this.#buttonRemoveSelector)
+            .forEach((button) => {
+                this.#observeButtonRemoveClick(button);
+            });
+    }
+
+    #observeButtonAddClick(button) {
         button.addEventListener('click', () => {
-            this.#updateProducts(button);
+            this.#addProduct(button);
             this.#storeProductsToLs();
 
             this.#increaseProductsCount();
@@ -47,8 +56,27 @@ class Cart {
         });
     }
 
-    #updateProducts(button) {
-        const productId = button.dataset.cart;
+    #observeButtonRemoveClick(button) {
+        button.addEventListener('click', () => {
+            this.#removeProduct(button);
+            this.#storeProductsToLs();
+
+            this.#decreaseProductsCount();
+            this.#showCheckoutButton();
+            this.#updateCheckoutButtonCount();
+        });
+    }
+
+    #removeProduct(button) {
+        const productId = button.dataset.cartRemove;
+        const productCount = this.#productsMap.get(productId) || 0;
+        const productEndCount = productCount - 1 < 0 ? 0 : productCount - 1;
+
+        this.#productsMap.set(productId, productEndCount);
+    }
+
+    #addProduct(button) {
+        const productId = button.dataset.cartAdd;
         const productCount = this.#productsMap.get(productId) || 0;
 
         this.#productsMap.set(productId, productCount + 1);
@@ -70,6 +98,10 @@ class Cart {
 
     #increaseProductsCount() {
         this.#productsCount++;
+    }
+
+    #decreaseProductsCount() {
+        this.#productsCount = this.#productsCount - 1 < 0 ? 0 : this.#productsCount - 1;
     }
 
     #updateCheckoutButtonCount() {

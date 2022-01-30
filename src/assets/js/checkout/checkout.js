@@ -58,8 +58,7 @@ class Checkout {
     }
 
     #setCheckoutSummaryPrice() {
-        const summary = this.#products.map(product => product.price)
-            .reduce((summaryPrice, productPrice) => summaryPrice + productPrice, 0);
+        const summary = this.#products.reduce((summaryPrice, product) => summaryPrice + product.price * this.#productsMap.get(String(product.id)), 0);
 
         document.querySelector(this.#checkoutSummarySelector).textContent = summary;
     }

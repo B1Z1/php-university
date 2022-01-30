@@ -36,7 +36,11 @@ $products = $productController->getAll();
                     <b class="tag is-light is-medium mr-4">
                         <?php echo $product->price; ?> zł
                     </b>
-                    <button data-cart="<?php echo $product->id; ?>" class="button is-primary">Do koszyka</button>
+
+                    <div class="buttons">
+                        <button data-cart-add="<?php echo $product->id; ?>" class="button is-primary">Dodaj</button>
+                        <button data-cart-remove="<?php echo $product->id; ?>" class="button is-danger">Usun</button>
+                    </div>
                 </div>
             </div>
         <?php } ?>
