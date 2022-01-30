@@ -1,5 +1,6 @@
 html,
 body {
+    min-height: 100vh;
     overflow: auto;
 }
 
@@ -13,4 +14,10 @@ body {
 
 .up-width-full {
     width: 100%;
+}
+
+.up-truncate {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
