@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS product
 (
     id          INT          NOT NULL AUTO_INCREMENT,
     name        VARCHAR(128) NOT NULL,
-    description VARCHAR(512) NOT NULL,
+    description TEXT         NOT NULL,
     price       FLOAT        NOT NULL,
     PRIMARY KEY (id)
 );

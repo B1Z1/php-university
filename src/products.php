@@ -16,7 +16,7 @@ $products = $productController->getAll();
 </head>
 <body>
 
-<div class="container is-fullheight pt-6">
+<div class="container is-fullheight py-6">
     <h1 class="up-text-center title mb-6">Lista produktów</h1>
 
     <dl>
@@ -33,9 +33,9 @@ $products = $productController->getAll();
                 </dd>
 
                 <div class="is-flex is-align-items-center is-justify-content-end">
-                    <span class="mr-4">
-                        <?php echo $product->price; ?>zł
-                    </span>
+                    <b class="tag is-light is-medium mr-4">
+                        <?php echo $product->price; ?> zł
+                    </b>
                     <button class="button is-primary">Do koszyka</button>
                 </div>
             </div>

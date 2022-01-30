@@ -51,3 +51,10 @@ INSERT INTO product (name, description, price)
            'Jeśli zerkniesz na w zasadzie dowolny ranking książek w sieci, z pewnością znajdzie się w nim pozycja „Rok 1984”. I słusznie.',
            50.00
     );
+
+INSERT INTO product (name, description, price)
+    VALUE (
+           'Proces',
+           'Do kategorii „książki, które warto przeczytać” bezsprzecznie należy również kolejny światowy klasyk, czyli „Proces” Kafki. To wyjątkowa opowieść o biurokracji i totalitaryzmie, które skrywają się pod płaszczykiem łagodnych przepisów. Historia opowiada o Józefie K. – prokurencie bankowym, który, mimo że nie zrobił niczego złego, zostaje aresztowany. Choć areszt jest bardzo łagodny – bohater musi tylko być pod nadzorem sądu, jego życie zmienia w najdrobniejszych szczegółach. Wstrząsająca opowieść, po którą naprawdę warto sięgnąć.',
+           99.99
+    );
