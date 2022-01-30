@@ -7,6 +7,12 @@ class UserHobbyController extends Dbh {
         $this->repository = new UserHobbyRepository();
     }
 
+    public function getByUserId(int $userId): array {
+        $dtos = $this->repository->getByUserId($userId);
+
+        return array_map(fn($dto): int => $this->convertDtoToId($dto), $dtos);
+    }
+
     public function addMultiple(int $userId, int ...$hobbyIds): bool {
         foreach ($hobbyIds as $hobbyId) {
             $this->add($userId, $hobbyId);
@@ -17,5 +23,9 @@ class UserHobbyController extends Dbh {
 
     public function add(int $userId, int $hobbyId): bool {
         return $this->repository->add($userId, $hobbyId);
+    }
+
+    private function convertDtoToId(mixed $dto): int {
+        return $dto['hobby_id'];
     }
 }

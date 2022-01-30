@@ -7,8 +7,23 @@ class UserController {
         $this->repository = new UserRepository();
     }
 
-    public function getUserByLogin(string $login) {
-        return $this->repository->getUserByLogin($login);
+    public function getUserByLogin(string $login): User|null {
+        $user = $this->repository->getUserByLogin($login);
+
+        if (!$user) {
+            return null;
+        }
+
+        return new User(
+            $user['user_id'],
+            $user['name'],
+            $user['surname'],
+            $user['email'],
+            $user['login'],
+            $user['password'],
+            $user['address'],
+            $user['degree_id']
+        );
     }
 
     public function addUser(
@@ -19,7 +34,7 @@ class UserController {
         string $password,
         string $address,
         int    $degreeId
-    ) {
+    ): bool {
         return $this->repository->addUser($name, $surname, $email, $login, $password, $address, $degreeId);
     }
 }

@@ -26,14 +26,18 @@ class RegistrationController {
         }
 
         $user = $this->userController->getUserByLogin($login);
-        $userId = $user['user_id'];
 
+        if (!$user) {
+            return null;
+        }
+
+        $userId = $user->id;
         $userHobbyAdded = $this->userHobbyController->addMultiple($userId, ...$hobbies);
 
         if (!$userHobbyAdded) {
             return null;
         }
 
-        return $user['login'];
+        return $user->login;
     }
 }

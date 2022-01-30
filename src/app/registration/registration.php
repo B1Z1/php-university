@@ -9,8 +9,7 @@ if (!isset($_POST['submit'])) {
 
 require_once 'share/user/user.inc.php';
 require_once 'share/user-hobby/user-hobby.inc.php';
-
-require_once 'app/register/RegistrationController.php';
+require_once 'app/registration/registration.inc.php';
 
 $name = $_POST["name"];
 $surname = $_POST["surname"];

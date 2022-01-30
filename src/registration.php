@@ -22,7 +22,7 @@ $hobbies = $hobbyController->getAll();
             Rejestracja
         </h1>
 
-        <form action="app/register/registration.inc.php" method="post">
+        <form action="app/registration/registration.php" method="post">
             <div class="field">
                 <label for="name" class="label">Imię:</label>
                 <input id="name"
