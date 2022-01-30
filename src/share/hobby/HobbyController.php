@@ -21,8 +21,13 @@ class HobbyController {
         return $this->fromDtos($dtos);
     }
 
-    public function getAll() {
-        return $this->repository->getAll();
+    /**
+     * @return Hobby[]
+     */
+    public function getAll(): array {
+        $dtos = $this->repository->getAll();
+
+        return $this->fromDtos($dtos);
     }
 
     /**

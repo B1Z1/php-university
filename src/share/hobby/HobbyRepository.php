@@ -26,10 +26,7 @@ class HobbyRepository extends Dbh {
 
     public function getAll(): array {
         $query = "SELECT * FROM hobby";
-        $statement = $this->connect()->query($query);
-        $response = $statement->fetchAll();
 
-        $statement = null;
-        return $response;
+        return $this->connect()->query($query)->fetchAll();
     }
 }

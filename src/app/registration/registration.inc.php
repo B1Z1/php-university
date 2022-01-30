@@ -1,5 +1,5 @@
 <?php
 
-require_once 'app/register/RegistrationController.php';
+require_once 'app/registration/RegistrationController.php';
 
 

@@ -1,11 +1,15 @@
 <?php
-include 'boot.php';
-include 'share/utils/dbh/Dbh.php';
-include 'share/hobby/HobbyRepository.php';
-include 'share/hobby/HobbyController.php';
+include_once 'boot.php';
+include_once 'share/user-hobby/user-hobby.inc.php';
+include_once 'share/hobby/hobby.inc.php';
+include_once 'share/degree/degree.inc.php';
 
 $hobbyController = new HobbyController();
+$degreesController = new DegreeController();
+
 $hobbies = $hobbyController->getAll();
+$degrees = $degreesController->getAll();
+
 ?>
 
 <!doctype html>
@@ -85,22 +89,38 @@ $hobbies = $hobbyController->getAll();
                        required>
             </div>
 
-            <div class="up-width-full select field is-multiple">
-                <label for="hobbies" class="label">Hobby:</label>
-                <select id="hobbies"
-                        class="up-width-full"
-                        name="hobbies[]"
-                        multiple
-                        required>
-                    <?php foreach ($hobbies as $hobby) { ?>
-                        <option value="<?php echo $hobby['hobby_id']; ?>">
-                            <?php echo $hobby['name']; ?>
-                        </option>
-                    <?php } ?>
-                </select>
+            <div class="field">
+                <label for="hobbies" class="label">Wykształcenie:</label>
+                <div class="up-width-full select">
+                    <select id="degree"
+                            class="up-width-full"
+                            name="degree"
+                            required>
+                        <?php foreach ($degrees as $key => $degree) { ?>
+                            <option value="<?php echo $degree->id; ?>">
+                                <?php echo $degree->name; ?>
+                            </option>
+                        <?php } ?>
+                    </select>
+                </div>
             </div>
 
-            <input type="hidden" value="1" name="degree">
+            <div class="field">
+                <label for="hobbies" class="label">Hobby:</label>
+                <div class="up-width-full select is-multiple">
+                    <select id="hobbies"
+                            class="up-width-full"
+                            name="hobbies[]"
+                            multiple
+                            required>
+                        <?php foreach ($hobbies as $hobby) { ?>
+                            <option value="<?php echo $hobby->id; ?>">
+                                <?php echo $hobby->name; ?>
+                            </option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
 
             <button type="submit"
                     name="submit"

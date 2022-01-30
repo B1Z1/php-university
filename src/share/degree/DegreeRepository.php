@@ -18,4 +18,10 @@ class DegreeRepository extends Dbh {
         $statement = null;
         return $response;
     }
+
+    public function getAll(): mixed {
+        $query = "SELECT * FROM degree";
+
+        return $this->connect()->query($query)->fetchAll();
+    }
 }
