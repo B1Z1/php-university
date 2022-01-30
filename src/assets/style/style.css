@@ -21,3 +21,21 @@ body {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+.up-cart-button {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(4px);
+
+    transition: .3s ease-in-out;
+    transition-property: transform, opacity, visibility;
+}
+
+.up-cart-button--active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
