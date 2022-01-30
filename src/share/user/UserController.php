@@ -15,7 +15,7 @@ class UserController {
         }
 
         return new User(
-            $user['user_id'],
+            $user['id'],
             $user['name'],
             $user['surname'],
             $user['email'],

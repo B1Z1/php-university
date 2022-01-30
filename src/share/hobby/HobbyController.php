@@ -44,7 +44,7 @@ class HobbyController {
      */
     private function fromDto(mixed $dto): Hobby {
         return new Hobby(
-            $dto['hobby_id'],
+            $dto['id'],
             $dto['name']
         );
     }

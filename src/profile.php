@@ -22,7 +22,7 @@ $degree = $degreeController->getById($user->degreeId);
 
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="pl">
 <head>
     <?php include 'base/head.php'; ?>
     <title><?php echo $user->name ?> Profile page</title>

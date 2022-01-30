@@ -7,7 +7,7 @@ class HobbyRepository extends Dbh {
      */
     public function getByIds(int ...$ids): array {
         $convertedIds = implode(', ', array_map(fn($id): string => '?', $ids));
-        $query = "SELECT * FROM hobby WHERE hobby_id IN ($convertedIds)";
+        $query = "SELECT * FROM hobby WHERE id IN ($convertedIds)";
         $statement = $this->connect()->prepare($query);
         $response = array();
 

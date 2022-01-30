@@ -13,7 +13,7 @@ $degrees = $degreesController->getAll();
 ?>
 
 <!doctype html>
-<html lang="en">
+<html lang="pl">
 <head>
     <?php include 'base/head.php'; ?>
     <title>Rejestracja</title>
