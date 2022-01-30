@@ -1,3 +1,6 @@
+<?php
+require_once 'boot.php';
+?>
 <!doctype html>
 <html lang="en">
 <head>

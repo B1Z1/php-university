@@ -1,9 +1,11 @@
 <?php
-include 'repositories/Dbh.php';
-include 'repositories/HobbyRepository.php';
+include 'boot.php';
+include 'share/utils/dbh/Dbh.php';
+include 'share/hobby/HobbyRepository.php';
+include 'share/hobby/HobbyController.php';
 
-$hobbyRepository = new HobbyRepository();
-$hobbies = $hobbyRepository->getAll();
+$hobbyController = new HobbyController();
+$hobbies = $hobbyController->getAll();
 ?>
 
 <!doctype html>
@@ -20,7 +22,7 @@ $hobbies = $hobbyRepository->getAll();
             Rejestracja
         </h1>
 
-        <form action="includes/registration.inc.php" method="post">
+        <form action="app/register/registration.inc.php" method="post">
             <div class="field">
                 <label for="name" class="label">Imię:</label>
                 <input id="name"
