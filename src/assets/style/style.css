@@ -8,6 +8,10 @@ body {
     text-align: center;
 }
 
+.up-text-end {
+    text-align: end;
+}
+
 .up-height-screen {
     height: 100vh;
 }

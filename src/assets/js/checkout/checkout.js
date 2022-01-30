@@ -3,6 +3,7 @@ import { ProductStorage } from '../utils/product/product-storage.js';
 class Checkout {
     #checkoutContainerSelector = '[data-checkout-container]';
     #checkoutSummarySelector = '[data-checkout-summary]';
+    #checkoutInputProductsSelector = '[data-checkout-products]';
 
     #productStorage;
     #productsMap;
@@ -15,6 +16,7 @@ class Checkout {
 
         await this.#fetchProducts();
 
+        this.#setProductsInputValue();
         this.#generateProductsHTML();
         this.#setCheckoutSummaryPrice();
     }
@@ -31,7 +33,7 @@ class Checkout {
         const productIds = Array.from(this.#productsMap.keys());
         const productIdsString = productIds.map(productId => `productIds[]=${productId}`)
             .join('&');
-        const response = await fetch(`/app/checkout/checkout?${productIdsString}`);
+        const response = await fetch(`/app/checkout/checkout-rest?${productIdsString}`);
 
         this.#products = await response.json();
     }
@@ -61,6 +63,12 @@ class Checkout {
         const summary = this.#products.reduce((summaryPrice, product) => summaryPrice + product.price * this.#productsMap.get(String(product.id)), 0);
 
         document.querySelector(this.#checkoutSummarySelector).textContent = summary;
+    }
+
+    #setProductsInputValue() {
+        const inputElement = document.querySelector(this.#checkoutInputProductsSelector);
+
+        inputElement.value = JSON.stringify(Array.from(this.#productsMap.entries()));
     }
 }
 
