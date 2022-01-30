@@ -1,5 +1,11 @@
 <?php
 require_once 'boot.php';
+require_once 'share/product/product.inc.php';
+
+$productController = new ProductController();
+
+$products = $productController->getAll();
+
 ?>
 
 <!doctype html>

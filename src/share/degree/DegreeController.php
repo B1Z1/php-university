@@ -13,7 +13,7 @@ class DegreeController {
     public function getAll(): array {
         $dtos = $this->repository->getAll();
 
-        return $this->fromDtos($dtos);
+        return $this->fromDtos(...$dtos);
     }
 
     public function getById(int $id): Degree {
@@ -26,7 +26,7 @@ class DegreeController {
      * @return Degree[]
      */
     private function fromDtos(mixed ...$dtos): array {
-        return array_map(fn($dto): Degree => $this->fromDto($dto), ...$dtos);
+        return array_map(fn($dto): Degree => $this->fromDto($dto), $dtos);
     }
 
     private function fromDto(mixed $dto): Degree {
