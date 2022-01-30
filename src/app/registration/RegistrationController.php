@@ -9,6 +9,17 @@ class RegistrationController {
         $this->userHobbyController = new UserHobbyController();
     }
 
+    /**
+     * @param string $name
+     * @param string $surname
+     * @param string $email
+     * @param string $login
+     * @param string $password
+     * @param string $address
+     * @param int $degreeId
+     * @param int[] $hobbyIds
+     * @return string|null
+     */
     public function register(
         string $name,
         string $surname,
@@ -17,7 +28,7 @@ class RegistrationController {
         string $password,
         string $address,
         int    $degreeId,
-        int    ...$hobbies
+        array  $hobbyIds
     ): string|null {
         $userAdded = $this->userController->addUser($name, $surname, $email, $login, $password, $address, $degreeId);
 
@@ -32,7 +43,7 @@ class RegistrationController {
         }
 
         $userId = $user->id;
-        $userHobbyAdded = $this->userHobbyController->addMultiple($userId, ...$hobbies);
+        $userHobbyAdded = $this->userHobbyController->addMultiple($userId, $hobbyIds);
 
         if (!$userHobbyAdded) {
             return null;

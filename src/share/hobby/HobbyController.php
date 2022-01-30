@@ -16,9 +16,9 @@ class HobbyController {
      */
     public function getByUserId(int $userId): array {
         $ids = $this->userHobbyController->getByUserId($userId);
-        $dtos = $this->repository->getByIds(...$ids);
+        $dtos = $this->repository->getByIds($ids);
 
-        return $this->fromDtos(...$dtos);
+        return $this->fromDtos($dtos);
     }
 
     /**
@@ -27,14 +27,14 @@ class HobbyController {
     public function getAll(): array {
         $dtos = $this->repository->getAll();
 
-        return $this->fromDtos(...$dtos);
+        return $this->fromDtos($dtos);
     }
 
     /**
-     * @param mixed ...$dtos
+     * @param array $dtos
      * @return Hobby[]
      */
-    private function fromDtos(mixed ...$dtos): array {
+    private function fromDtos(mixed $dtos): array {
         return array_map(fn($dto): Hobby => $this->fromDto($dto), $dtos);
     }
 

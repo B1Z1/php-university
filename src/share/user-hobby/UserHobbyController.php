@@ -13,7 +13,12 @@ class UserHobbyController extends Dbh {
         return array_map(fn($dto): int => $this->convertDtoToId($dto), $dtos);
     }
 
-    public function addMultiple(int $userId, int ...$hobbyIds): bool {
+    /**
+     * @param int $userId
+     * @param int[] $hobbyIds
+     * @return bool
+     */
+    public function addMultiple(int $userId, array $hobbyIds): bool {
         foreach ($hobbyIds as $hobbyId) {
             $this->add($userId, $hobbyId);
         }

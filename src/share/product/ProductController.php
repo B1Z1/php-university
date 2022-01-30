@@ -8,6 +8,16 @@ class ProductController {
     }
 
     /**
+     * @param int[] $productIds
+     * @return Product[]
+     */
+    public function getByIds(array $productIds): array {
+        $dtos = $this->repository->getByIds($productIds);
+
+        return $this->fromDtos(...$dtos);
+    }
+
+    /**
      * @return Product[]
      */
     public function getAll(): array {
