@@ -51,6 +51,7 @@ $products = $productController->getAll();
 
 <?php include 'base/footer.php'; ?>
 
+<script src="assets/js/utils/product/product-storage.js" defer type="module"></script>
 <script src="assets/js/cart/cart.js" defer type="module"></script>
 </body>
 </html>

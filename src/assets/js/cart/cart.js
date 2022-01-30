@@ -1,17 +1,19 @@
-class Cart {
-    #productsLsKey = 'up-shop-products';
+import { ProductStorage } from '../utils/product/product-storage.js';
 
+class Cart {
     #buttonSelector = '[data-cart]';
 
     #checkoutButtonActiveClass = 'up-cart-button--active';
     #checkoutButtonSelector = '[data-cart-button]';
     #checkoutCountButtonSelector = '[data-cart-counter]';
 
+    #productStorage;
     #productsMap;
 
     #productsCount = 0;
 
     init() {
+        this.#initProductStorage();
         this.#setProductsMap();
         this.#initializeProductsCount();
 
@@ -24,18 +26,7 @@ class Cart {
     }
 
     #setProductsMap() {
-        this.#productsMap = this.#getProductMapFromLs();
-    }
-
-    #getProductMapFromLs() {
-        const productsRaw = localStorage.getItem(this.#productsLsKey);
-        let productsMap = new Map();
-
-        if (productsRaw) {
-            productsMap = new Map(JSON.parse(productsRaw));
-        }
-
-        return productsMap;
+        this.#productsMap = this.#productStorage.get();
     }
 
     #observeButtonsClick() {
@@ -64,10 +55,7 @@ class Cart {
     }
 
     #storeProductsToLs() {
-        const productsArray = Array.from(this.#productsMap.entries());
-        const productsRaw = JSON.stringify(productsArray);
-
-        localStorage.setItem(this.#productsLsKey, productsRaw);
+        this.#productStorage.set(this.#productsMap);
     }
 
     #initializeProductsCount() {
@@ -84,7 +72,6 @@ class Cart {
         this.#productsCount++;
     }
 
-
     #updateCheckoutButtonCount() {
         const countElement = document.querySelector(this.#checkoutCountButtonSelector);
 
@@ -99,6 +86,10 @@ class Cart {
         }
 
         checkoutButton.classList.add(this.#checkoutButtonActiveClass);
+    }
+
+    #initProductStorage() {
+        this.#productStorage = new ProductStorage();
     }
 }
 
