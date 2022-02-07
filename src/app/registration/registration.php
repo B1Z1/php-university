@@ -30,7 +30,7 @@ $userLogin = $signupController->register(
     $password,
     $address,
     $degreeId,
-    ...$hobbies
+    $hobbies
 );
 
 if ($userLogin) {

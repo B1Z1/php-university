@@ -20,8 +20,8 @@ $degrees = $degreesController->getAll();
 </head>
 <body>
 
-<div class="up-height-screen container is-full is-flex is-flex-direction-column is-align-items-center is-justify-content-center">
-    <div class="column is-half">
+<div class="container is-full py-6">
+    <div class="column is-half mx-auto">
         <h1 class="up-text-center title">
             Rejestracja
         </h1>
