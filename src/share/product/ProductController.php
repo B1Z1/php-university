@@ -15,6 +15,10 @@ class ProductController {
         return $this->repository->edit($id, $name, $description, $price);
     }
 
+    public function delete(int $id): bool {
+        return $this->repository->delete($id);
+    }
+
     /**
      * @param int[] $productIds
      * @return Product[]

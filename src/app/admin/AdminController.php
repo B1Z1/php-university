@@ -15,4 +15,8 @@ class AdminController {
     public function editProduct(int $id, string $name, string $description, float $price): bool {
         return $this->productController->edit($id, $name, $description, $price);
     }
+
+    public function deleteProduct(int $id): bool {
+        return $this->productController->delete($id);
+    }
 }

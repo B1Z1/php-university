@@ -8,8 +8,14 @@ $products = $productController->getAll();
 
 function renderBottomProduct(Product $product) { ?>
     <span class="tag mr-4"><?php echo $product->price; ?>zł</span>
-    <button data-admin-product-edit="<?php echo $product->id; ?>" class="button is-warning">Edytuj</button>
-    <button data-admin-product-cancel="<?php echo $product->id; ?>" class="button is-warning is-hidden">Powrót</button>
+    <button data-admin-product-edit="<?php echo $product->id; ?>" class="button is-warning mr-2">Edytuj</button>
+    <button data-admin-product-cancel="<?php echo $product->id; ?>" class="button is-warning is-hidden mr-2">Powrót
+    </button>
+    <form action="app/admin/admin-delete-product.php"
+          method="POST">
+        <input type="hidden" name="productId" value="<?php echo $product->id; ?>">
+        <button class="button is-danger" type="submit" name="submit">Usun</button>
+    </form>
 <?php } ?>
 
 <!doctype html>

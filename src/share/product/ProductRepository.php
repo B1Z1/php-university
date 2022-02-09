@@ -31,6 +31,21 @@ class ProductRepository extends Dbh {
         return true;
     }
 
+    public function delete(int $id): bool {
+        $query = 'DELETE FROM product WHERE id = ?';
+        $statement = $this->connect()->prepare($query);
+
+        try {
+            $statement->execute(array($id));
+        } catch (Exception) {
+            $statement = null;
+            return false;
+        }
+
+        $statement = null;
+        return true;
+    }
+
     /**
      * @param int[] $ids
      * @return mixed[]
