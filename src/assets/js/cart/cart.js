@@ -50,7 +50,7 @@ class Cart {
             this.#addProduct(button);
             this.#storeProductsToLs();
 
-            this.#increaseProductsCount();
+            this.#updateProductsCount();
             this.#showCheckoutButton();
             this.#updateCheckoutButtonCount();
         });
@@ -61,7 +61,7 @@ class Cart {
             this.#removeProduct(button);
             this.#storeProductsToLs();
 
-            this.#decreaseProductsCount();
+            this.#updateProductsCount();
             this.#showCheckoutButton();
             this.#updateCheckoutButtonCount();
         });
@@ -71,6 +71,11 @@ class Cart {
         const productId = button.dataset.cartRemove;
         const productCount = this.#productsMap.get(productId) || 0;
         const productEndCount = productCount - 1 < 0 ? 0 : productCount - 1;
+
+        if (productEndCount <= 0) {
+            this.#productsMap.delete(productId);
+            return;
+        }
 
         this.#productsMap.set(productId, productEndCount);
     }
@@ -96,12 +101,14 @@ class Cart {
         this.#productsCount = summaryCount;
     }
 
-    #increaseProductsCount() {
-        this.#productsCount++;
-    }
+    #updateProductsCount() {
+        let summary = 0;
 
-    #decreaseProductsCount() {
-        this.#productsCount = this.#productsCount - 1 < 0 ? 0 : this.#productsCount - 1;
+        for (const count of this.#productsMap.values()) {
+            summary += count;
+        }
+
+        this.#productsCount = summary;
     }
 
     #updateCheckoutButtonCount() {

@@ -45,11 +45,11 @@ $degree = $degreeController->getById($user->degreeId);
     <h2 class="subtitle mt-6">Moje hobby to</h2>
 
     <ul class="up-text-center">
-        <?php foreach ($hobbies as $hobby) { ?>
+        <?php foreach ($hobbies as $hobby): ?>
             <li>
                 <b><?php echo $hobby->name; ?></b>
             </li>
-        <?php } ?>
+        <?php endforeach; ?>
     </ul>
 </div>
 

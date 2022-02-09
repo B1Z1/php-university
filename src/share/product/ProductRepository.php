@@ -1,6 +1,36 @@
 <?php
 
 class ProductRepository extends Dbh {
+    public function add(string $name, string $description, float $price): bool {
+        $query = 'INSERT INTO product (name, description, price) VALUES (?, ?, ?)';
+        $statement = $this->connect()->prepare($query);
+
+        try {
+            $statement->execute(array($name, $description, $price));
+        } catch (Exception) {
+            $statement = null;
+            return false;
+        }
+
+        $statement = null;
+        return true;
+    }
+
+    public function edit(int $id, string $name, string $description, float $price): bool {
+        $query = 'UPDATE product SET name = ?, description = ?, price = ? WHERE id = ?';
+        $statement = $this->connect()->prepare($query);
+
+        try {
+            $statement->execute(array($name, $description, $price, $id));
+        } catch (Exception) {
+            $statement = null;
+            return false;
+        }
+
+        $statement = null;
+        return true;
+    }
+
     /**
      * @param int[] $ids
      * @return mixed[]

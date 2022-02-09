@@ -90,17 +90,17 @@ $degrees = $degreesController->getAll();
             </div>
 
             <div class="field">
-                <label for="hobbies" class="label">Wykształcenie:</label>
+                <label for="degree" class="label">Wykształcenie:</label>
                 <div class="up-width-full select">
                     <select id="degree"
                             class="up-width-full"
                             name="degree"
                             required>
-                        <?php foreach ($degrees as $key => $degree) { ?>
+                        <?php foreach ($degrees as $key => $degree): ?>
                             <option value="<?php echo $degree->id; ?>">
                                 <?php echo $degree->name; ?>
                             </option>
-                        <?php } ?>
+                        <?php endforeach; ?>
                     </select>
                 </div>
             </div>
@@ -113,11 +113,11 @@ $degrees = $degreesController->getAll();
                             name="hobbies[]"
                             multiple
                             required>
-                        <?php foreach ($hobbies as $hobby) { ?>
+                        <?php foreach ($hobbies as $hobby): ?>
                             <option value="<?php echo $hobby->id; ?>">
                                 <?php echo $hobby->name; ?>
                             </option>
-                        <?php } ?>
+                        <?php endforeach; ?>
                     </select>
                 </div>
             </div>

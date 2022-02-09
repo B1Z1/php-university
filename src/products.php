@@ -8,6 +8,17 @@ $products = $productController->getAll();
 
 ?>
 
+<?php function renderBottomProduct(Product $product): void { ?>
+    <b class="tag is-light is-medium mr-4">
+        <?php echo $product->price; ?> zł
+    </b>
+
+    <div class="buttons">
+        <button data-cart-add="<?php echo $product->id; ?>" class="button is-primary">Dodaj</button>
+        <button data-cart-remove="<?php echo $product->id; ?>" class="button is-danger">Usun</button>
+    </div>
+<?php } ?>
+
 <!doctype html>
 <html lang="pl">
 <head>
@@ -17,34 +28,11 @@ $products = $productController->getAll();
 <body>
 
 <div class="container is-fullheight py-6">
-    <h1 class="up-text-center title mb-6">Lista książek</h1>
+    <div class="column is-half mx-auto">
+        <h1 class="up-text-center title mb-6">Lista książek</h1>
 
-    <dl>
-        <?php foreach ($products as $product) { ?>
-            <div class="column is-half mx-auto">
-                <dt class="mb-4">
-                    <h4 class="subtitle">
-                        <b><?php echo $product->name; ?></b>
-                    </h4>
-                </dt>
-
-                <dd class="mb-4">
-                    <?php echo $product->description; ?>
-                </dd>
-
-                <div class="is-flex is-align-items-center is-justify-content-end">
-                    <b class="tag is-light is-medium mr-4">
-                        <?php echo $product->price; ?> zł
-                    </b>
-
-                    <div class="buttons">
-                        <button data-cart-add="<?php echo $product->id; ?>" class="button is-primary">Dodaj</button>
-                        <button data-cart-remove="<?php echo $product->id; ?>" class="button is-danger">Usun</button>
-                    </div>
-                </div>
-            </div>
-        <?php } ?>
-    </dl>
+        <?php renderProductList($products, fn(Product $product) => renderBottomProduct($product)); ?>
+    </div>
 </div>
 
 <a href="/checkout"

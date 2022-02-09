@@ -7,6 +7,14 @@ class ProductController {
         $this->repository = new ProductRepository();
     }
 
+    public function add(string $name, string $description, float $price): bool {
+        return $this->repository->add($name, $description, $price);
+    }
+
+    public function edit(int $id, string $name, string $description, float $price): bool {
+        return $this->repository->edit($id, $name, $description, $price);
+    }
+
     /**
      * @param int[] $productIds
      * @return Product[]
