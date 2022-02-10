@@ -7,3 +7,9 @@ function navigateTo(string $path): void {
 
     header("Location: http://$host/$path");
 }
+
+function getUrlWithToken(string $path, string $token): string {
+    $encoded = urlencode($token);
+
+    return "$path?token=$encoded";
+}

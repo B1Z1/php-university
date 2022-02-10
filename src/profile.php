@@ -52,13 +52,17 @@ $degree = $degreeController->getById($user->degreeId);
 
     <h2 class="subtitle mt-6">Moje hobby to</h2>
 
-    <ul class="up-text-center">
+    <ul class="up-text-center mb-6">
         <?php foreach ($hobbies as $hobby): ?>
             <li>
                 <b><?php echo $hobby->name; ?></b>
             </li>
         <?php endforeach; ?>
     </ul>
+
+    <a href="<?php echo getUrlWithToken('/products', $token); ?>" class="button">
+        Przejdź do produktów
+    </a>
 </div>
 
 <?php include 'base/footer.php'; ?>
