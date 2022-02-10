@@ -1,12 +1,14 @@
 <?php
 
 class RegistrationController {
-    private UserController $userController;
-    private UserHobbyController $userHobbyController;
+    private readonly UserController $userController;
+    private readonly UserHobbyController $userHobbyController;
+    private readonly HashService $hashService;
 
     public function __construct() {
         $this->userController = new UserController();
         $this->userHobbyController = new UserHobbyController();
+        $this->hashService = new HashService();
     }
 
     /**
@@ -30,7 +32,8 @@ class RegistrationController {
         int    $degreeId,
         array  $hobbyIds
     ): string|null {
-        $userAdded = $this->userController->addUser($name, $surname, $email, $login, $password, $address, $degreeId);
+        $encryptedPassword = $this->hashService->encrypt(array($login, $password));
+        $userAdded = $this->userController->addUser($name, $surname, $email, $login, $encryptedPassword, $address, $degreeId);
 
         if (!$userAdded) {
             return null;
@@ -49,6 +52,6 @@ class RegistrationController {
             return null;
         }
 
-        return $user->login;
+        return $encryptedPassword;
     }
 }

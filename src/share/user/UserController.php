@@ -7,6 +7,16 @@ class UserController {
         $this->repository = new UserRepository();
     }
 
+    public function getUserByCredentials(string $login, string $password): User|null {
+        $user = $this->repository->getUserByCredentials($login, $password);
+
+        if (!$user) {
+            return null;
+        }
+
+        return $this->fromDTO($user);
+    }
+
     public function getUserByLogin(string $login): User|null {
         $user = $this->repository->getUserByLogin($login);
 
@@ -14,16 +24,7 @@ class UserController {
             return null;
         }
 
-        return new User(
-            $user['id'],
-            $user['name'],
-            $user['surname'],
-            $user['email'],
-            $user['login'],
-            $user['password'],
-            $user['address'],
-            $user['degree_id']
-        );
+        return $this->fromDTO($user);
     }
 
     public function addUser(
@@ -36,5 +37,18 @@ class UserController {
         int    $degreeId
     ): bool {
         return $this->repository->addUser($name, $surname, $email, $login, $password, $address, $degreeId);
+    }
+
+    private function fromDTO(mixed $dto): User {
+        return new User(
+            $dto['id'],
+            $dto['name'],
+            $dto['surname'],
+            $dto['email'],
+            $dto['login'],
+            $dto['password'],
+            $dto['address'],
+            $dto['degree_id']
+        );
     }
 }

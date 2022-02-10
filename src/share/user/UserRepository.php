@@ -1,6 +1,15 @@
 <?php
 
 class UserRepository extends Dbh {
+    public function getUserByCredentials(string $login, string $password): mixed {
+        $query = 'SELECT * FROM user WHERE login LIKE ? AND password LIKE ?';
+        $statement = $this->connect()->prepare($query);
+
+        $statement->execute(array($login, $password));
+
+        return $statement->fetch();
+    }
+
     public function getUserByLogin(string $login): mixed {
         $query = 'SELECT * FROM user WHERE login LIKE ?';
         $statement = $this->connect()->prepare($query);

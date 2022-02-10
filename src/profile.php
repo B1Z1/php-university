@@ -1,22 +1,30 @@
 <?php
 require_once 'boot.php';
 
-$userLogin = $_GET['userLogin'];
-
-if (!isset($userLogin)) {
-    navigateTo('');
+if (!isset($_GET['token'])) {
+    navigateTo('login');
 }
 
+require_once 'share/utils/hash/HashService.php';
 require_once 'share/user/user.inc.php';
 require_once 'share/user-hobby/user-hobby.inc.php';
 require_once 'share/hobby/hobby.inc.php';
 require_once 'share/degree/degree.inc.php';
 
+$token = $_GET['token'];
+$hashService = new HashService();
 $userController = new UserController();
 $hobbyController = new HobbyController();
 $degreeController = new DegreeController();
 
-$user = $userController->getUserByLogin($userLogin);
+$credentials = $hashService->decrypt($token);
+$user = $userController->getUserByCredentials($credentials[0], $token);
+
+if (!$user) {
+    navigateTo('login');
+    exit();
+}
+
 $hobbies = $hobbyController->getByUserId($user->id);
 $degree = $degreeController->getById($user->degreeId);
 

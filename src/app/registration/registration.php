@@ -7,6 +7,7 @@ if (!isset($_POST['submit'])) {
     exit();
 }
 
+require_once 'share/utils/hash/HashService.php';
 require_once 'share/user/user.inc.php';
 require_once 'share/user-hobby/user-hobby.inc.php';
 require_once 'app/registration/registration.inc.php';
@@ -22,7 +23,7 @@ $hobbies = $_POST["hobbies"];
 
 $signupController = new RegistrationController();
 
-$userLogin = $signupController->register(
+$token = $signupController->register(
     $name,
     $surname,
     $email,
@@ -33,8 +34,10 @@ $userLogin = $signupController->register(
     $hobbies
 );
 
-if ($userLogin) {
-    navigateTo("profile?userLogin=$userLogin");
+if ($token) {
+    $encoded = urlencode($token);
+
+    navigateTo("profile?token=$encoded");
 } else {
     navigateTo('registration?error=USER_NOT_ADDED');
 }
