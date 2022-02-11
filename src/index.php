@@ -1,5 +1,23 @@
 <?php
 require_once 'boot.php';
+require_once 'share/utils/hash/HashService.php';
+require_once 'share/permissions/permissions.inc.php';
+require_once 'share/user/user.inc.php';
+
+
+if (isset($_GET['token'])) {
+    $token = $_GET['token'];
+    $hashService = new HashService();
+    $userController = new UserController();
+    $credentials = $hashService->decrypt($token);
+    $user = $userController->getUserByCredentials($credentials[0], $token);
+
+    if ($user) {
+        navigateTo(getUrlWithToken('profile', $token));
+        exit();
+    }
+}
+
 ?>
 
 <!doctype html>

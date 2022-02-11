@@ -9,6 +9,7 @@ class User {
     public readonly string $password;
     public readonly string $address;
     public readonly int $degreeId;
+    public readonly Permissions $permissions;
 
     public function __construct(
         int    $id,
@@ -18,7 +19,8 @@ class User {
         string $login,
         string $password,
         string $address,
-        int    $degreeId
+        int    $degreeId,
+        int    $permissionId
     ) {
         $this->id = $id;
         $this->name = $name;
@@ -28,5 +30,6 @@ class User {
         $this->password = $password;
         $this->address = $address;
         $this->degreeId = $degreeId;
+        $this->permissions = Permissions::from($permissionId);
     }
 }

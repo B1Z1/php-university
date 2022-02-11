@@ -28,15 +28,25 @@ class UserController {
     }
 
     public function addUser(
-        string $name,
-        string $surname,
-        string $email,
-        string $login,
-        string $password,
-        string $address,
-        int    $degreeId
+        string      $name,
+        string      $surname,
+        string      $email,
+        string      $login,
+        string      $password,
+        string      $address,
+        int         $degreeId,
+        Permissions $permissionId
     ): bool {
-        return $this->repository->addUser($name, $surname, $email, $login, $password, $address, $degreeId);
+        return $this->repository->addUser(
+            $name,
+            $surname,
+            $email,
+            $login,
+            $password,
+            $address,
+            $degreeId,
+            $permissionId->getId()
+        );
     }
 
     private function fromDTO(mixed $dto): User {
@@ -48,7 +58,8 @@ class UserController {
             $dto['login'],
             $dto['password'],
             $dto['address'],
-            $dto['degree_id']
+            $dto['degree_id'],
+            $dto['permission_id']
         );
     }
 }

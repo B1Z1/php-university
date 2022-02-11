@@ -8,6 +8,7 @@ if (!isset($_POST['submit'])) {
 }
 
 require_once 'share/utils/hash/HashService.php';
+require_once 'share/permissions/permissions.inc.php';
 require_once 'share/user/user.inc.php';
 require_once 'app/login/login.inc.php';
 

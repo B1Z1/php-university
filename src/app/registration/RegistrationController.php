@@ -23,17 +23,27 @@ class RegistrationController {
      * @return string|null
      */
     public function register(
-        string $name,
-        string $surname,
-        string $email,
-        string $login,
-        string $password,
-        string $address,
-        int    $degreeId,
-        array  $hobbyIds
+        string      $name,
+        string      $surname,
+        string      $email,
+        string      $login,
+        string      $password,
+        string      $address,
+        int         $degreeId,
+        array       $hobbyIds,
+        Permissions $permissions = Permissions::Normal
     ): string|null {
         $encryptedPassword = $this->hashService->encrypt(array($login, $password));
-        $userAdded = $this->userController->addUser($name, $surname, $email, $login, $encryptedPassword, $address, $degreeId);
+        $userAdded = $this->userController->addUser(
+            $name,
+            $surname,
+            $email,
+            $login,
+            $encryptedPassword,
+            $address,
+            $degreeId,
+            $permissions
+        );
 
         if (!$userAdded) {
             return null;

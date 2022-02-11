@@ -2,10 +2,9 @@
 
 class DegreeRepository extends Dbh {
     public function getById(int $id): mixed {
-        $query = "SELECT * FROM degree WHERE degree_id = ?";
+        $query = "SELECT * FROM degree WHERE id = ?";
         $statement = $this->connect()->prepare($query);
         $response = null;
-
         try {
             if ($statement->execute(array($id))) {
                 $response = $statement->fetch();

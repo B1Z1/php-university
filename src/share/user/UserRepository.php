@@ -26,13 +26,14 @@ class UserRepository extends Dbh {
         string $login,
         string $password,
         string $address,
-        int    $degreeId
+        int    $degreeId,
+        int    $permissionId
     ): bool {
-        $query = 'INSERT INTO user (name, surname, email, login, password, address, degree_id) VALUES (?, ?, ?, ?, ?, ?, ?)';
+        $query = 'INSERT INTO user (name, surname, email, login, password, address, degree_id, permission_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
         $statement = $this->connect()->prepare($query);
 
         try {
-            $statement->execute(array($name, $surname, $email, $login, $password, $address, $degreeId));
+            $statement->execute(array($name, $surname, $email, $login, $password, $address, $degreeId, $permissionId));
         } catch (Exception) {
             $statement = null;
             return false;
