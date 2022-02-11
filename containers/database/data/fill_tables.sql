@@ -32,4 +32,4 @@ VALUES (1, 'Administrator'),
        (2, 'Normal');
 
 INSERT INTO user (id, name, surname, login, email, password, address, degree_id, permission_id)
-VALUES (1, 'admin', 'admin', 'admin', 'admin@gmail.com', 'admin', 'admin', 1, 1);
+VALUES (1, 'admin', 'admin', 'admin', 'admin@gmail.com', 'ueAV+R695WAsk3EPDOOnAGNLrGavow==', 'admin', 1, 1);

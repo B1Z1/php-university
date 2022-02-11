@@ -29,10 +29,12 @@ services:
     container_name: database
     image: mysql
     restart: always
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     ports:
       - 3307:3306
     volumes:
       - ./containers/database/data:/docker-entrypoint-initdb.d
     environment:
+      LANG: C.UTF-8
       MYSQL_DATABASE: shop
       MYSQL_ROOT_PASSWORD: root

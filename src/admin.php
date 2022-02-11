@@ -47,6 +47,14 @@ function renderBottomProduct(Product $product) { ?>
 </head>
 <body>
 
+<div class="buttons up-top-buttons">
+    <a href="<?php echo getUrlWithToken('profile', $token); ?>"
+       class="button">
+        Przejdź do profilu
+    </a>
+    <a href="/" class="button">Wyloguj się</a>
+</div>
+
 <div class="up-height-screen container">
     <div class="column is-half mx-auto">
         <?php renderProductList($products, fn(Product $product) => renderBottomProduct($product)); ?>

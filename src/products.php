@@ -47,6 +47,14 @@ $products = $productController->getAll();
 </head>
 <body>
 
+<div class="buttons up-top-buttons">
+    <a href="<?php echo getUrlWithToken('profile', $token); ?>"
+       class="button">
+        Przejdź do profilu
+    </a>
+    <a href="/" class="button">Wyloguj się</a>
+</div>
+
 <div class="container is-fullheight py-6">
     <div class="column is-half mx-auto">
         <h1 class="up-text-center title mb-6">Lista książek</h1>

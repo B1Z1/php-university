@@ -61,9 +61,21 @@ $degree = $degreeController->getById($user->degreeId);
         <?php endforeach; ?>
     </ul>
 
-    <a href="<?php echo getUrlWithToken('/products', $token); ?>" class="button">
-        Przejdź do produktów
-    </a>
+    <div class="buttons">
+        <a href="<?php echo getUrlWithToken('products', $token); ?>"
+           class="button">
+            Przejdź do produktów
+        </a>
+
+        <?php if ($user->permissions === Permissions::Admin): ?>
+            <a href="<?php echo getUrlWithToken('admin', $token); ?>"
+               class="button">
+                Przejdź do panelu administracyjnego
+            </a>
+        <?php endif; ?>
+
+        <a href="/" class="button">Wyloguj się</a>
+    </div>
 </div>
 
 <?php include 'base/footer.php'; ?>

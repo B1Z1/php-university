@@ -7,6 +7,7 @@ if (!isset($_GET['token'])) {
 }
 
 require_once 'share/utils/hash/HashService.php';
+require_once 'share/permissions/permissions.inc.php';
 require_once 'share/user/user.inc.php';
 require_once 'share/product/product.inc.php';
 
@@ -48,7 +49,9 @@ if (!$user) {
             </span>
         </p>
 
-        <form class="is-flex is-justify-content-space-between" action="app/checkout/checkout.php" method="POST">
+        <form class="is-flex is-justify-content-space-between"
+              action="app/checkout/checkout.php?token=<?php echo $token; ?>"
+              method="POST">
             <div class="field mr-4">
                 <input id="email"
                        class="input"

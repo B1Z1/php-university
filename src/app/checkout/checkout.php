@@ -2,7 +2,7 @@
 
 require_once '../../boot.php';
 
-if (!isset($_POST['submit'])) {
+if (!isset($_POST['submit']) && !isset($_GET['token'])) {
     navigateTo('');
     exit();
 }
@@ -12,6 +12,7 @@ require_once 'app/checkout/checkout.inc.php';
 
 $checkoutController = new CheckoutController();
 
+$token = $_GET['token'];
 $email = $_POST["email"];
 $address = $_POST["address"];
 $productsCount = json_decode($_POST["products"]);
@@ -27,4 +28,4 @@ foreach ($products as $product) {
 
 mail($email, 'Twoje zamówienie zostało złożone', $messageContent);
 
-navigateTo('success');
+navigateTo(getUrlWithToken('success', $token));
