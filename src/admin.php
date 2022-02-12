@@ -27,12 +27,12 @@ $productController = new ProductController();
 
 $products = $productController->getAll();
 
-function renderBottomProduct(Product $product) { ?>
+function renderBottomProduct(Product $product, string $token) { ?>
     <span class="tag mr-4"><?php echo $product->price; ?>zł</span>
     <button data-admin-product-edit="<?php echo $product->id; ?>" class="button is-warning mr-2">Edytuj</button>
     <button data-admin-product-cancel="<?php echo $product->id; ?>" class="button is-warning is-hidden mr-2">Powrót
     </button>
-    <form action="app/admin/admin-delete-product.php"
+    <form action="<?php echo getUrlWithToken("app/admin/admin-delete-product.php", $token); ?>"
           method="POST">
         <input type="hidden" name="productId" value="<?php echo $product->id; ?>">
         <button class="button is-danger" type="submit" name="submit">Usun</button>
@@ -57,9 +57,9 @@ function renderBottomProduct(Product $product) { ?>
 
 <div class="up-height-screen container">
     <div class="column is-half mx-auto">
-        <?php renderProductList($products, fn(Product $product) => renderBottomProduct($product)); ?>
+        <?php renderProductList($products, fn(Product $product) => renderBottomProduct($product, $token)); ?>
 
-        <form method="POST" action="app/admin/admin-add-product.php">
+        <form method="POST" action="<?php echo getUrlWithToken('app/admin/admin-add-product.php', $token) ?>">
             <div class="field">
                 <input id="name"
                        class="input"
@@ -98,7 +98,7 @@ function renderBottomProduct(Product $product) { ?>
     <form data-admin-edit-form
           class="my-4"
           method="POST"
-          action="app/admin/admin-edit-product.php">
+          action="<?php echo getUrlWithToken("app/admin/admin-edit-product.php", $token); ?>">
         <div class="field">
             <input id="name"
                    class="input"

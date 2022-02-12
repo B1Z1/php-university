@@ -50,7 +50,7 @@ if (!$user) {
         </p>
 
         <form class="is-flex is-justify-content-space-between"
-              action="app/checkout/checkout.php?token=<?php echo $token; ?>"
+              action="<?php echo getUrlWithToken("app/checkout/checkout.php", $token) ?>"
               method="POST">
             <div class="field mr-4">
                 <input id="email"
